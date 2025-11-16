@@ -11,6 +11,8 @@ services:
         fromDatabase:
           name: mattermost-db
           property: connectionString
+      - key: MM_SERVICESETTINGS_SITEURL
+        value: https://your-app-name.onrender.com
 
 databases:
   - name: mattermost-db
