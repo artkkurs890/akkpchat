@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: rocketchat
+    env: docker
+    plan: free
+    docker:
+      dockerfilePath: ./docker-compose.yml
+      service: rocketchat
+    envVars:
+      - key: MONGO_URL
+        fromService:
+          name: mongo
+          type: pserv
+          property: connectionString.standard
+          
+  - type: pserv
+    name: mongo
+    plan: free
+    disk:
+      name: mongo_data
+      sizeGB: 1
+    docker:
+      image: mongo:6.0
+      command: mongod --replSet rs0
